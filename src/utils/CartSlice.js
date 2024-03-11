@@ -7,16 +7,69 @@ const cartSlice = createSlice({
     },
     reducers:{
         addItem: (state, action)=>{
-            state.items.push(action.payload);
+            const itemExist=state.items.find((item)=>{ 
+                return item.card.info.id===action.payload.card.info.id
+            })
+            let cart=state.items;
+            if(itemExist){
+                cart=state.items.map((item)=>{
+                    if(item.card.info.id===action.payload.card.info.id){
+                      
+                        return {
+                            ...item,
+                                quantity:item.quantity+1,
+                            }
+                    }else{
+                        return item;
+                    }
+                })
+               
+                
+            }
+             else{
+                cart.push({
+                        quantity:1,
+                        ...action.payload
+                    })
+                
+             }
+            
+            console.log(action.payload.card.info.id);
+            console.log(cart);
+            state.items=cart;
+         
         },
-        removeItem: (state)=>{
-            state.items.pop();
+        removeItem: (state, action)=>{
+                cart=[];
+                for (let index = 0; index < state.items.length; index++) {
+                    const element = state.items[index];
+                    
+                        if(element.card.info.id===action.payload.card.info.id){
+                          if(element.quantity===1){
+                              continue;
+                          }
+                          cart.push({
+                              ...element,
+                              quantity:element.quantity-1
+                          })
+                      }
+                          else{
+                              cart.push(element);
+                          }
+                        
+                      
+                    
+                }
+               
+            
+            state.items= cart;
+            
         },
         clearCart:(state)=>{
             state.items.length=0;
-        }
+        },
     }
 });
-console.log(cartSlice)
+
 export const {addItem,removeItem,clearCart} = cartSlice.actions;
 export default  cartSlice.reducer;

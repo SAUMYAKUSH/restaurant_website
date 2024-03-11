@@ -15,6 +15,7 @@ import Cart from "./Components/Cart"
 
 
 
+
 const AppLayout = ()=>{
     const[userName, setUserName] = useState();
 
@@ -27,7 +28,7 @@ const AppLayout = ()=>{
     return(
         <Provider store={appStore}>
         <UserContext.Provider value={{loggedInUser: userName}}>
-        <div className="app">   
+        <div className="app"> 
          <Header/>
          <Outlet/>
         </div>

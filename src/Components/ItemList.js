@@ -1,6 +1,6 @@
 import React from "react";
 import {IMAGE_URL} from "../utils/constant";
-import {addItem} from "../utils/CartSlice";
+import {addItem,removeItem} from "../utils/CartSlice";
 import { useDispatch } from "react-redux";
 const ItemList = ({ items }) => {
   const dispatch= useDispatch();
@@ -8,7 +8,10 @@ const ItemList = ({ items }) => {
     // Dispatch an action
     dispatch(addItem(item))
   }
-  // console.log(items);
+  const handleRemoveItem=(item)=>{
+    dispatch(removeItem(item))
+  }
+  console.log(items);
   return (
     <div>
       
@@ -20,10 +23,11 @@ const ItemList = ({ items }) => {
               <span> - ₹{item?.card?.info?.defaultPrice ? item?.card?.info?.defaultPrice/100 : item?.card?.info?.price/100}</span>
             </div>
             <p className="text-xs">{item?.card?.info?.description}</p>
-            </div>
-            <div>
-            <div className="absolute" >
-            <button className="p-2 bg-black text-white shadow-lg mx-16 rounded-lg" onClick={()=>handleAddItem(item)}> Add +</button>
+            {item.quantity && <h1 className="font-bold">Quantity-- {item.quantity} </h1>}
+            <div className="text-right flex justify-center" >
+             <button className="p-2 bg-black text-white shadow-lg mx-16 rounded-lg" onClick={()=>handleAddItem(item)}> Add +</button>
+             {item.quantity>0 && <button className="p-2 bg-black text-white shadow-lg mx-16 rounded-lg" onClick={()=>handleRemoveItem(item)}>Remove</button>}
+
             </div>
             <img src={IMAGE_URL + item?.card?.info?.imageId} className="w-40 p-4"></img>
 
