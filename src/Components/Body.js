@@ -31,7 +31,7 @@ const Body = ()=>{
     // Conditional Rendering
     console.log(listOfRestaurant)
      arr = filteredRestaurant.map(r=> r.info.id)
-    // console.log(arr)
+    console.log(arr)
     if(listOfRestaurant.length===0){
         return <Shimmer/>
     }
