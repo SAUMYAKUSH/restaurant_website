@@ -29,8 +29,8 @@ const Body = ()=>{
          setfilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
     // Conditional Rendering
-    // console.log(listOfRestaurant)
-    arr =filteredRestaurant.map(r=> r.info.id)
+    console.log(listOfRestaurant)
+     arr = filteredRestaurant.map(r=> r.info.id)
     // console.log(arr)
     if(listOfRestaurant.length===0){
         return <Shimmer/>
