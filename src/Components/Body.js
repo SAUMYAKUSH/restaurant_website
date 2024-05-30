@@ -6,7 +6,7 @@ import Shimmer from "./Shimmer";
 
 const Body = ()=>{
     const [listOfRestaurant,setListOfRestaurant ] = useState([]);
-    const [filteredRestaurant, setfilteredRestaurant] = useState([]);
+    const [filteredRestaurant, setfilteredRestaurant] = useState(mockDataReal?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     const [searchText, setSearchText] = useState('');
 
     useEffect(()=>{
@@ -14,6 +14,7 @@ const Body = ()=>{
 
             
              fetchData();
+             console.log("hg")
          },1000)
     },[]);
     const fetchData = async()=>{
@@ -22,7 +23,7 @@ const Body = ()=>{
         // const json = await data.json(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
          const json =  mockDataReal;
         
-        //  console.log(json)
+         console.log(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
          setListOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         //  setListOfRestaurant(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         //  setfilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
